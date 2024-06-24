@@ -41,7 +41,9 @@ function Keyboard() {
         });
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [currAttempt]
+    
   );
   useEffect(() => {
     document.addEventListener("keydown", handleKeyboard);

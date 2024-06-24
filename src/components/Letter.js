@@ -17,6 +17,7 @@ function Letter({ letterPos, attemptVal }) {
       console.log(letter);
       setDisabledLetters((prev) => [...prev, letter]);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currAttempt.attempt]);
   return (
     <div className="letter" id={letterState}>
