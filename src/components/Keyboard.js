@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useContext } from "react";
+import React, { useCallback, useEffect, useContext ,useMemo} from "react";
 import Key from "./Keys";
 import { AppContext } from "../App";
 
@@ -7,9 +7,13 @@ function Keyboard() {
   const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
   const keys3 = ["Z", "X", "C", "V", "B", "N", "M"];
 
+      // Memoize the keys arrays to avoid unnecessary re-renders
+      const memoizedKeys1 = useMemo(() => ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],  []);
+      const memoizedKeys2 = useMemo(() => ["A", "S", "D", "F", "G", "H", "J", "K", "L"], []);
+      const memoizedKeys3 = useMemo(() => ["Z", "X", "C", "V", "B", "N", "M"], []);
+
   const {
     disabledLetters,
-    currAttempt,
     gameOver,
     onSelectLetter,
     onEnter,
@@ -24,24 +28,17 @@ function Keyboard() {
       } else if (event.key === "Backspace") {
         onDelete();
       } else {
-        keys1.forEach((key) => {
-          if (event.key.toLowerCase() === key.toLowerCase()) {
-            onSelectLetter(key);
-          }
-        });
-        keys2.forEach((key) => {
-          if (event.key.toLowerCase() === key.toLowerCase()) {
-            onSelectLetter(key);
-          }
-        });
-        keys3.forEach((key) => {
-          if (event.key.toLowerCase() === key.toLowerCase()) {
-            onSelectLetter(key);
-          }
+        const allKeys = [...memoizedKeys1, ...memoizedKeys2, ...memoizedKeys3];
+        allKeys.forEach((k) => {
+            if (event.key === k.toLowerCase()) {
+                onSelectLetter(k);
+            }
         });
       }
     },
-    [gameOver.gameOver, keys1, keys2, keys3, onDelete, onEnter, onSelectLetter]
+    [gameOver.gameOver,  memoizedKeys1,
+      memoizedKeys2,
+      memoizedKeys3, onDelete, onEnter, onSelectLetter]
 
   );
   useEffect(() => {
