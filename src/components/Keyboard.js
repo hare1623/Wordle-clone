@@ -41,9 +41,8 @@ function Keyboard() {
         });
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [currAttempt]
-    
+    [gameOver.gameOver, keys1, keys2, keys3, onDelete, onEnter, onSelectLetter]
+
   );
   useEffect(() => {
     document.addEventListener("keydown", handleKeyboard);

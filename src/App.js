@@ -29,14 +29,17 @@ function App() {
   const onEnter = () => {
     console.log(wordSet)
     if (currAttempt.letter !== 5) return;
-
+    
     let currWord = "";
     for (let i = 0; i < 5; i++) {
       currWord += board[currAttempt.attempt][i].toLowerCase();
     }
+    if(wordSet.has(currWord.toLowerCase())){
       setCurrAttempt({ attempt: currAttempt.attempt + 1, letter: 0 });
-    
-
+      
+    }else{
+      alert("Word Not Found");
+    }
     if (currWord=== correctWord) {
       alert('GameOver')
       console.log(currWord.toLowerCase())
@@ -48,7 +51,6 @@ function App() {
       setGameOver({ gameOver: true, guessedWord: false });
       return;
     }
-
     console.log(gameOver, currWord)
   };
 
