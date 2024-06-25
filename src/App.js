@@ -34,7 +34,7 @@ function App() {
     for (let i = 0; i < 5; i++) {
       currWord += board[currAttempt.attempt][i].toLowerCase();
     }
-    if(wordSet.has(currWord.toLowerCase())){
+    if(wordSet.has(currWord)){
       setCurrAttempt({ attempt: currAttempt.attempt + 1, letter: 0 });
       
     }else{
